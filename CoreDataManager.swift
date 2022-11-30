@@ -4,7 +4,7 @@ import CoreData
 class CoreDataManager{
     let persistentContainer : NSPersistentContainer
     init(){
-        persistentContainer = NSPersistentContainer(name: "Mobiliario")
+        persistentContainer = NSPersistentContainer(name: "CrudMobiliario")
         persistentContainer.loadPersistentStores(completionHandler: {
             (descripcion, error) in
             if let error = error {

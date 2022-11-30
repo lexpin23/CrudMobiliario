@@ -57,7 +57,7 @@ class CoreDataManager{
 
     func actualizaraMobiliario(mobiliario:Mobiliario){
         let fetchRequest:NSFetchRequest<Mobiliario>=Mobiliario.fetchRequest()
-        let predicate = NSPredicate(format:"id=%@",Mobiliario.id ?? "")
+        let predicate = NSPredicate(format:"id=%@",mobiliario.id ?? "")
         fetchRequest.predicate=predicate
         do{
             let datos = try persistentContainer.viewContext.fetch(fetchRequest)

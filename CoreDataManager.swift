@@ -54,4 +54,36 @@ class CoreDataManager{
         return nil
         
     }
+
+    func actualizaraMobiliario(mobiliario:Mobiliario){
+        let fetchRequest:NSFetchRequest<Mobiliario>=Mobiliario.fetchRequest()
+        let predicate = NSPredicate(format:"id=%@",Mobiliario.id ?? "")
+        fetchRequest.predicate=predicate
+        do{
+            let datos = try persistentContainer.viewContext.fetch(fetchRequest)
+            let m=datos.first
+            m?.nombre=mobiliario.nombre
+            m?.precio=mobiliario.precio
+            m?.existencia=mobiliario.existencia
+            m?.id=mobiliario.id
+            m?.categoria=mobiliario.categoria
+            try persistentContainer.viewContext.save()
+            print("Actualización con éxito")
+        }
+        catch{
+             print("Error al guardar. Error en \(error)")
+        }
+        
+    }
+    
+    func borrarMobiliario(mobiliario: Mobiliario){
+        persistentContainer.viewContext.delete(mobiliario)
+        
+        do{
+            try persistentContainer.viewContext.save()
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print("Failed to save context \(error.localizedDescription)")
+        }
+    }
 }

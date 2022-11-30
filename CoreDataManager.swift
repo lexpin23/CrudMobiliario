@@ -39,4 +39,19 @@ class CoreDataManager{
             return[]
         }
     }
+
+    func leerMobiliario(id:String)->Mobiliario?{
+        let fetchRequest:NSFetchRequest<Mobiliario>=Mobiliario.fetchRequest()
+        let predicate = NSPredicate(format:"id=%@",id)
+        fetchRequest.predicate=predicate
+        do{
+            let datos = try persistentContainer.viewContext.fetch(fetchRequest)
+            return datos.first
+        }
+        catch{
+            print("Error al guardar. Error en \(error)")
+        }
+        return nil
+        
+    }
 }
